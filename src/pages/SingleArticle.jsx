@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import Article from "../components/Article";
 
 function SingleArticle() {
-  return (
-    <div>SingleArticle</div>
-  )
+  return <Article />;
 }
 
-export default SingleArticle
+export default SingleArticle;

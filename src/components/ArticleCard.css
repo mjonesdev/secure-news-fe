@@ -2,17 +2,29 @@
     display: flex;
     flex-direction: column;
     background-color: #EEEEEE;
-    width: 95vw;
+    width: clamp(15rem, 95vw, 60rem);
     padding: 1rem;
     border-radius: 10px;
     margin: 0.5rem;
     color: #222831;
     text-align: start;
+    border-color: #2228313b;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.articleCard__container:hover {
+    background-color: #00acb528;
+}
+
+a {
+    text-decoration: none;
 }
 
 .articleCard__text-title {
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
+    text-decoration: none;
 }
 
 .articleCard__text-author {
