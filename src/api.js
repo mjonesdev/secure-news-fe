@@ -9,3 +9,11 @@ export function getTopics() {
     return response.data.topics;
   });
 }
+
+export function getArticles(topic) {
+  return api
+    .get("/articles", { params: { topic: topic } })
+    .then((response) => {
+      return response.data.articles
+    });
+}

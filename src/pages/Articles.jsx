@@ -1,12 +1,14 @@
-import React from 'react'
-import SortAndFilter from '../components/SortAndFilter'
+import React from "react";
+import ArticleList from "../components/ArticleList";
+import SortAndFilter from "../components/SortAndFilter";
 
 function Articles() {
   return (
     <>
-    <SortAndFilter/>
+      <SortAndFilter />
+      <ArticleList />
     </>
-  )
+  );
 }
 
-export default Articles
+export default Articles;

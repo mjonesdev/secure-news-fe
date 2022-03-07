@@ -19,7 +19,7 @@ function Navigation() {
     getTopics().then((response) => {
       const topicsObj = response.map(
         (topicArea) =>
-          topicArea.slug.charAt(0).toUpperCase() + topicArea.slug.slice(1)
+          topicArea.slug
       );
       setTopics(topicsObj);
     });
@@ -71,8 +71,8 @@ function Navigation() {
                   </Link>
                     
                 </li>
-                {topics.map((topic, index) => {
-                      return <li key={index} className='nav__sub-menu-text' ><Link to={"/articles/" + topic}><GoPrimitiveDot /> <span>{topic}</span></Link></li>
+                {topics.map((topic) => {
+                      return <li key={topic} className='nav__sub-menu-text' ><Link to={"/articles/" + topic}><GoPrimitiveDot /> <span>{topic.charAt(0).toUpperCase() + topic.slice(1)}</span></Link></li>
                     })}
                 </>
                 

@@ -1,0 +1,25 @@
+.articleCard__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #EEEEEE;
+    width: 95vw;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0.5rem;
+    color: #222831;
+    text-align: start;
+}
+
+.articleCard__text-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+.articleCard__text-author {
+    font-size: 0.8rem;
+}
+
+.articleCard__text-sub {
+    align-self: end;
+    margin-top: 0.5rem;
+}
