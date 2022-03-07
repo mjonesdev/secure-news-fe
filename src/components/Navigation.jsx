@@ -4,9 +4,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { RiArticleFill } from "react-icons/ri";
 import { MdAccountCircle } from "react-icons/md";
+import { GoPrimitiveDot } from 'react-icons/go';
 import { getTopics } from "../api";
 import { IconContext } from "react-icons";
-import './Navigation.css'
+import "./Navigation.css";
 
 function Navigation() {
   const [sidebar, setSidebar] = useState(false);
@@ -47,36 +48,46 @@ function Navigation() {
 
   return (
     <header className="nav__header">
-        <IconContext.Provider value={{color: '#fff'}}>
-      <div className="nav__nav-container">
-        <Link to="#" className="nav__menu-bars">
-          <GiHamburgerMenu onClick={showSidebar} />
-        </Link>
-      </div>
-      <nav
-        className={
-          sidebar ? "nav__nav-menu active" : "nav__nav-menu"
-        }
-      >
-        <ul className="nav__nav-menu-items" onClick={showSidebar}>
-          <li className="nav__nav-menuToggle">
-            <Link to="#" className="nav__menu-bars">
-              <AiOutlineClose />
-            </Link>
-          </li>
-          {sidebarContent.map((item, index) => {
-              return (
-                  <li key={index} className={item.className}>
-                      <Link to={item.path}>
-                          {item.icon}
-                          <span>{item.title}</span>
-                          </Link>
-                      </li>
-              )
-          })}
-        </ul>
-      </nav>
-      <h1 className="nav__title">Secure News</h1>
+      <IconContext.Provider value={{ color: "#fff" }}>
+        <div>
+          <Link to="#" className="nav__menu-bars">
+            <GiHamburgerMenu onClick={showSidebar} />
+          </Link>
+        </div>
+        <nav className={sidebar ? "nav__nav-menu active" : "nav__nav-menu"}>
+          <ul className="nav__nav-menu-items" onClick={showSidebar}>
+            <li className="nav__nav-menuToggle">
+              <Link to="#" className="nav__menu-bars">
+                <AiOutlineClose />
+              </Link>
+            </li>
+            {sidebarContent.map((item, index) => {
+              return item.title === "Articles" ? (
+                <>
+                <li key={index} className={item.className}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                    
+                </li>
+                {topics.map((topic, index) => {
+                      return <li key={index} className='nav__sub-menu-text' ><Link to={"/articles/" + topic}><GoPrimitiveDot /> <span>{topic}</span></Link></li>
+                    })}
+                </>
+                
+              ) : (
+                <li key={index} className={item.className}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <h1 className="nav__title">Secure News</h1>
       </IconContext.Provider>
     </header>
   );

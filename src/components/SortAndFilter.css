@@ -1,0 +1,48 @@
+.sort__container {
+    display: flex;
+    justify-content: end;
+    padding: 1.3rem 0;
+}
+
+.sort__menu-bars {
+    margin-right: 1.5rem;
+    font-size: 2rem;
+    background: none;
+}
+
+.sort__menu {
+    background-color: #222831;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    transition: 850ms;
+}
+
+.sort__menu.active {
+    right: 0;
+    transition: 350ms;
+}
+
+.sort__menu-items {
+    width: 100%;
+}
+
+.sort__menuToggle {
+    background-color: #222831;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.sort__label {
+    padding-top: 0.3rem;
+    margin-right: 1rem;
+    color: #222831;
+    font-size: 1.1rem;
+}
