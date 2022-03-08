@@ -1,0 +1,5 @@
+.home__link-container {
+    display: flex;
+    width: clamp(20rem, 100%, 50rem);
+    margin: auto;
+}

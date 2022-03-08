@@ -1,0 +1,14 @@
+.linkButton__container {
+    background-color: #EEEEEE;
+    margin: 1rem 0.5rem;
+    text-decoration: none;
+    text-align: center;
+    padding: 1.2rem 0.8rem;
+    color: #222831;
+    flex-grow: 1;
+    border-radius: 10px;
+}
+
+.linkButton__container:hover {
+    background-color: #00acb528;
+}

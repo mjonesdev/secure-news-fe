@@ -25,7 +25,7 @@ function Article() {
   const articleBody = isLoading ? (
     <>Loading...</>
   ) : (
-    <article className="article__container">
+    <main className="article__container">
       <h2 className="article__title">{article.title}</h2>
       <span className="article__author">{article.author}</span>
       <p className="article__body">{article.body}</p>
@@ -33,7 +33,7 @@ function Article() {
         <span className="article__votes">Votes: {article.votes}</span>
         <ArticleDate dateString={article.created_at}/>
       </div>
-    </article>
+    </main>
   );
 
   if (error) {
