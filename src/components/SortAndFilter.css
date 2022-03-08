@@ -105,3 +105,16 @@
 .sort__menu-reset {
     align-self: center;
 }
+
+.sort__menu-bars-closed {
+  color: #222831;
+}
+
+.sort__topic-title {
+  align-self: center;
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+  margin-right: auto;
+  margin-left: 2rem;
+  color: #222831;
+}
