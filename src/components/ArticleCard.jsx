@@ -1,6 +1,7 @@
 import React from "react";
 import "./ArticleCard.css";
 import { Link } from "react-router-dom";
+import ArticleDate from "./ArticleDate";
 
 function ArticleCard({ articleDetails: { title, author, votes, created_at, article_id } }) {
   return (
@@ -10,7 +11,7 @@ function ArticleCard({ articleDetails: { title, author, votes, created_at, artic
         <p className="articleCard__text-author">Author: {author}</p>
         <span className="articleCard__text-sub">Votes: {votes}</span>
         <span className="articleCard__text-sub">
-          Published: {created_at.match(/\d\d\d\d-\d\d-\d\d/)}
+          <ArticleDate dateString={created_at}/>
         </span>
       </div>
     </Link>

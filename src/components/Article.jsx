@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticle } from "../api";
 import ErrorMessage from "./ErrorMessage";
+import ArticleDate from "./ArticleDate";
 import "./Article.css";
 
 function Article() {
@@ -29,7 +30,7 @@ function Article() {
       <p className="article__body">{article.body}</p>
       <div className="article__details-container">
         <span className="article__votes">Votes: {article.votes}</span>
-        <span>{article.created_at.slice(0, 10)}</span>
+        <ArticleDate dateString={article.created_at}/>
       </div>
     </article>
   );
