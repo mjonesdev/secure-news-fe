@@ -10,6 +10,7 @@ function ArticleList() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true)
     getArticles(topic).then((response) => setArticles(response));
     setIsLoading(false);
   }, [topic]);
