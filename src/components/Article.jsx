@@ -15,6 +15,7 @@ function Article() {
     setIsLoading(true);
     getArticle(article_id)
       .then((response) => {
+        setError(null)
         setArticle(response)
         setIsLoading(false)
       })
