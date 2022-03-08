@@ -1,0 +1,36 @@
+.article__container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: clamp(22rem, 90vw, 60rem);
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2rem;
+  color: #222831;
+}
+
+.article__title {
+    text-align: center;
+}
+
+.article__author {
+    align-self: flex-start;
+    margin-left: 0;
+    margin-bottom: 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.article__body {
+    margin-bottom: 2rem;
+}
+
+.article__details-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article__votes {
+    margin-left: 0;
+}

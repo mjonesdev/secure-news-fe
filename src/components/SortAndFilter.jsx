@@ -5,11 +5,14 @@ import { GoPrimitiveDot } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { getTopics } from "../api";
+import { useParams } from "react-router-dom"
 import "./SortAndFilter.css";
 
 function SortAndFilter() {
   const [sidebar, setSidebar] = useState(false);
   const [topics, setTopics] = useState([]);
+  
+  const {topic} = useParams()
 
   useEffect(() => {
     getTopics().then((response) => {
@@ -20,15 +23,18 @@ function SortAndFilter() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  const topicHeader = (topic) ? <h5 className="sort__topic-title">{topic.charAt(0).toUpperCase()+topic.slice(1)}</h5> : <></>
+
   return (
     <div className="sort__container">
-      <IconContext.Provider value={{ color: "#393E46" }}>
-        <h3 className="sort__label">Sort</h3>
-        <div>
-          <Link to="#" className="sort__menu-bars">
-            <GiHamburgerMenu onClick={showSidebar} />
-          </Link>
-        </div>
+      {topicHeader}
+      <h3 className="sort__label">Sort</h3>
+      <div>
+        <Link to="#" className="sort__menu-bars sort__menu-bars-closed">
+          <GiHamburgerMenu onClick={showSidebar} />
+        </Link>
+      </div>
+      <IconContext.Provider value={{ color: "#fff" }}>
         <div className={sidebar ? "sort__menu active" : "sort__menu"}>
           <ul className="sort__menu-items" onClick={showSidebar}>
             <li className="sort__menuToggle">
@@ -51,7 +57,9 @@ function SortAndFilter() {
             })}
             <li className="sort__menu-text">Sort</li>
             <li className="sort__menu-text">
-              <Link to='/articles'><span className="sort__menu-reset">Reset</span></Link>
+              <Link to="/articles">
+                <span className="sort__menu-reset">Reset</span>
+              </Link>
             </li>
           </ul>
         </div>

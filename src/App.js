@@ -19,7 +19,6 @@ function App() {
         <Route path="article/:article_id" element={<SingleArticle />} />
         <Route path="/user" element={<Account />} />
         <Route path="*" element={<Error />} />
-        <Route path="/error/:error_id" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

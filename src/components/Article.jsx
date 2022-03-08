@@ -1,22 +1,45 @@
-import React, {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getArticle } from "../api";
+import ErrorMessage from "./ErrorMessage";
+import ArticleDate from "./ArticleDate";
+import "./Article.css";
 
 function Article() {
-    const [article, setArticle] = useState({})
-    const [isLoading, setIsLoading] = useState(true)
-   const {article_id} = useParams()
+  const [article, setArticle] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { article_id } = useParams();
 
-   useEffect(() => {
-       
-   }, [])
+  useEffect(() => {
+    setIsLoading(true);
+    getArticle(article_id)
+      .then((response) => {
+        setError(null)
+        setArticle(response)
+        setIsLoading(false)
+      })
+      .catch((err) => setError({err}));
+  }, []);
 
-   const articleBody = isLoading ? <></> : <p>Hello</p>
+  const articleBody = isLoading ? (
+    <>Loading...</>
+  ) : (
+    <article className="article__container">
+      <h2 className="article__title">{article.title}</h2>
+      <span className="article__author">{article.author}</span>
+      <p className="article__body">{article.body}</p>
+      <div className="article__details-container">
+        <span className="article__votes">Votes: {article.votes}</span>
+        <ArticleDate dateString={article.created_at}/>
+      </div>
+    </article>
+  );
 
-  return (
-    <div>
-        {articleBody}
-    </div>
-  )
+  if (error) {
+    return <ErrorMessage error={error} />;
+  }
+  return <div>{articleBody}</div>;
 }
 
-export default Article
+export default Article;
