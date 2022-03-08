@@ -17,3 +17,8 @@ export function getArticles(topic) {
       return response.data.articles
     });
 }
+
+export function getArticle(article_id) {
+  return api.get(`/articles/${article_id}`)
+  .then(response => response.data.article)
+}
