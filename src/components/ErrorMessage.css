@@ -33,3 +33,11 @@
     margin: 0;
     text-align: center;
 }
+
+.error__message-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
