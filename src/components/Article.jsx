@@ -29,7 +29,7 @@ function Article() {
       <p className="article__body">{article.body}</p>
       <div className="article__details-container">
         <span className="article__votes">Votes: {article.votes}</span>
-        <span className="article__time">{article.created_at.slice(0, 10)}</span>
+        <span>{article.created_at.slice(0, 10)}</span>
       </div>
     </article>
   );
