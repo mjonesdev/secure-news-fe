@@ -17,7 +17,7 @@ function Article() {
         setArticle(response)
         setIsLoading(false)
       })
-      .catch((err) => setError(err));
+      .catch((err) => setError({err}));
   }, []);
 
   const articleBody = isLoading ? (
