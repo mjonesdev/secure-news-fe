@@ -9,8 +9,8 @@ function ErrorMessage({ error }) {
       <span>{error.err.response.data.msg} list</span>
     </div>
   ) : (
-    <div>
-      <h5>The page you are looking for can not be found.</h5>
+    <div className="error__message-container">
+      <h5>Page can not be found.</h5>
     </div>
   );
 
