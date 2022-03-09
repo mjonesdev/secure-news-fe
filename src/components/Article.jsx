@@ -4,22 +4,28 @@ import { getArticle } from "../api";
 import ErrorMessage from "./ErrorMessage";
 import ArticleDate from "./ArticleDate";
 import "./Article.css";
+import Likes from "./Likes";
+import ErrorModal from "./ErrorModal";
 
 function Article() {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [votes, setVotes] = useState();
+  const [likeErr, setLikeErr] = useState(null);
+
   const { article_id } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     getArticle(article_id)
       .then((response) => {
-        setError(null)
-        setArticle(response)
-        setIsLoading(false)
+        setError(null);
+        setArticle(response);
+        setIsLoading(false);
+        setVotes(response.votes);
       })
-      .catch((err) => setError({err}));
+      .catch((err) => setError({ err }));
   }, []);
 
   const articleBody = isLoading ? (
@@ -30,16 +36,24 @@ function Article() {
       <span className="article__author">{article.author}</span>
       <p className="article__body">{article.body}</p>
       <div className="article__details-container">
-        <span className="article__votes">Votes: {article.votes}</span>
-        <ArticleDate dateString={article.created_at}/>
+        <Likes
+          setLikeErr={setLikeErr}
+          votes={votes}
+          setVotes={setVotes}
+          article_id={article.article_id}
+        />
+        <ArticleDate dateString={article.created_at} />
       </div>
     </main>
   );
-
+  const errorModal = likeErr ? <ErrorModal setLikeErr={setLikeErr}>{likeErr}</ErrorModal> : null;
   if (error) {
     return <ErrorMessage error={error} />;
   }
-  return <div>{articleBody}</div>;
+  return <div>
+    {articleBody}
+    {errorModal}
+    </div>;
 }
 
 export default Article;

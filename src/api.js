@@ -11,14 +11,19 @@ export function getTopics() {
 }
 
 export function getArticles(topic) {
-  return api
-    .get("/articles", { params: { topic: topic } })
-    .then((response) => {
-      return response.data.articles
-    });
+  return api.get("/articles", { params: { topic: topic } }).then((response) => {
+    return response.data.articles;
+  });
 }
 
 export function getArticle(article_id) {
-  return api.get(`/articles/${article_id}`)
-  .then(response => response.data.article)
+  return api
+    .get(`/articles/${article_id}`)
+    .then((response) => response.data.article);
+}
+
+export function incrementArticle(values) {
+  return api
+    .patch(`/articles/${values.article_id}`, { inc_votes: values.increment })
+    .then((response) => response.data.article);
 }
