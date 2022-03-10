@@ -29,11 +29,22 @@ export function incrementArticle(values) {
 }
 
 export function getComments(article_id) {
-  return api.get(`/articles/${article_id}/comments`).then(response => {
-    return response.data.comments
-  })
+  return api.get(`/articles/${article_id}/comments`).then((response) => {
+    return response.data.comments;
+  });
 }
 
 export function incrementComment(values) {
-  return api.patch(`/comments/${values.id}`, { inc_votes: values.increment}).then(response => response.data.comment)
+  return api
+    .patch(`/comments/${values.id}`, { inc_votes: values.increment })
+    .then((response) => response.data.comment);
+}
+
+export function postComment(values) {
+  return api
+    .post(`/articles/${values.article_id}/comments`, {
+      username: values.username,
+      body: values.body,
+    })
+    .then((response) => response.data.comment);
 }

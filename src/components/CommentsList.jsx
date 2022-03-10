@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getComments } from "../api";
+import AddComment from "./AddComment";
 import Comment from "./Comment";
 import "./CommentList.css";
 
-function CommentsList() {
+function CommentsList({error, setError}) {
   const [comments, setComments] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [commentMade, setCommentMade] = useState(false)
 
   const { article_id } = useParams();
 
@@ -16,7 +18,7 @@ function CommentsList() {
       setComments(() => response);
       setIsLoading(() => false);
     });
-  }, [article_id]);
+  }, [article_id, commentMade]);
 
   return (
     <section className="comments__container-outer">
@@ -33,6 +35,9 @@ function CommentsList() {
         ) : (
           <p>Loading...</p>
         )}
+      </div>
+      <div>
+          <AddComment article_id={article_id} error={error} setError={setError} setCommentMade={setCommentMade} commentMade={commentMade} />
       </div>
     </section>
   );

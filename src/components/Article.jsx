@@ -7,10 +7,9 @@ import "./Article.css";
 import Likes from "./Likes";
 import ErrorModal from "./ErrorModal";
 
-function Article() {
+function Article({error, setError}) {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [votes, setVotes] = useState();
   const [likeErr, setLikeErr] = useState(null);
 
@@ -47,7 +46,7 @@ function Article() {
       </div>
     </main>
   );
-  const errorModal = likeErr ? <ErrorModal setLikeErr={setLikeErr}>{likeErr}</ErrorModal> : null;
+  const errorModal = likeErr ? <ErrorModal setErr={setLikeErr}>{likeErr}</ErrorModal> : null;
   if (error) {
     return <ErrorMessage error={error} />;
   }

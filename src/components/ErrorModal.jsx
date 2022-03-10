@@ -3,9 +3,9 @@ import { AiOutlineClose } from "react-icons/ai";
 import './ErrorModal.css'
 
 
-function ErrorModal({ children, setLikeErr }) {
+function ErrorModal({ children, setErr }) {
   const handleClick = () => {
-    setLikeErr(() => null);
+    setErr(() => null);
   };
 
   return (
