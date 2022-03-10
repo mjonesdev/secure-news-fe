@@ -24,6 +24,16 @@ export function getArticle(article_id) {
 
 export function incrementArticle(values) {
   return api
-    .patch(`/articles/${values.article_id}`, { inc_votes: values.increment })
+    .patch(`/articles/${values.id}`, { inc_votes: values.increment })
     .then((response) => response.data.article);
+}
+
+export function getComments(article_id) {
+  return api.get(`/articles/${article_id}/comments`).then(response => {
+    return response.data.comments
+  })
+}
+
+export function incrementComment(values) {
+  return api.patch(`/comments/${values.id}`, { inc_votes: values.increment}).then(response => response.data.comment)
 }

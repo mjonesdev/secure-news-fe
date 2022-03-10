@@ -40,7 +40,8 @@ function Article() {
           setLikeErr={setLikeErr}
           votes={votes}
           setVotes={setVotes}
-          article_id={article.article_id}
+          id={article.article_id}
+          type="article"
         />
         <ArticleDate dateString={article.created_at} />
       </div>

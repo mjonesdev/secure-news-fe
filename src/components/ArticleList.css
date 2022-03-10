@@ -5,3 +5,7 @@
     margin: auto;
     width: 90vw;
 }
+
+.articleList__container-list-item {
+    list-style: none;
+}
