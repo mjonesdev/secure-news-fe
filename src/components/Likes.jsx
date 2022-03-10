@@ -1,5 +1,5 @@
 import React from "react";
-import { incrementArticle } from "../api";
+import { incrementArticle, incrementComment } from "../api";
 import { useState } from "react";
 import {
   AiFillDislike,
@@ -7,12 +7,14 @@ import {
   AiOutlineDislike,
   AiOutlineLike,
 } from "react-icons/ai";
+import './Likes.css'
 
-function Likes({ setLikeErr, votes, setVotes, article_id }) {
+function Likes({ setLikeErr, votes, setVotes, id, type }) {
   const [like, setLike] = useState(null);
   const [dislike, setDislike] = useState(null);
 
   const handleLike = (value) => {
+    const incrementFunction = (type === "article") ? incrementArticle : incrementComment
     let setFunction = setLike;
     let comparisonValue = dislike;
     let changeValue = 1;
@@ -27,8 +29,8 @@ function Likes({ setLikeErr, votes, setVotes, article_id }) {
       if (currentCheck === true) {
         setFunction(false);
         setVotes((votes) => votes - changeValue);
-        incrementArticle({
-          article_id: article_id,
+        incrementFunction({
+          id: id,
           increment: -changeValue,
         }).catch((err) => {
           setVotes((votes) => votes + changeValue);
@@ -38,7 +40,7 @@ function Likes({ setLikeErr, votes, setVotes, article_id }) {
       } else {
         setFunction(true);
         setVotes((votes) => votes + changeValue);
-        incrementArticle({ article_id: article_id, increment: changeValue })
+        incrementFunction({ id: id, increment: changeValue })
           .then((response) => setVotes(response.votes))
           .catch((err) => {
             setVotes((votes) => votes - changeValue);
@@ -53,17 +55,17 @@ function Likes({ setLikeErr, votes, setVotes, article_id }) {
   const dislikeIcon = dislike ? <AiFillDislike /> : <AiOutlineDislike />;
 
   return (
-    <span className="article__likes">
+    <span className="likes__container">
       <button
         onClick={() => handleLike("like")}
-        className="article__like-button"
+        className="likes__container-button"
       >
         {likeIcon}
       </button>
-      <span className="article__vote-count">{votes}</span>
+      <span className="likes__vote-count">{votes}</span>
       <button
         onClick={() => handleLike("dislike")}
-        className="article__dislike-button"
+        className="likes__container-dislike-button"
       >
         {dislikeIcon}
       </button>

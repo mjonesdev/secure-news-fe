@@ -1,0 +1,22 @@
+.comment__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 0.3rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    border-style: solid;
+    border-color: #393E46;
+    border-width: 2px;
+}
+
+.comment__container-header {
+    align-self: start;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.comment__container-body {
+    margin-bottom: 0.5rem;
+}
+
