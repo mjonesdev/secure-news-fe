@@ -41,7 +41,6 @@ function Likes({ setLikeErr, votes, setVotes, id, type }) {
         setFunction(true);
         setVotes((votes) => votes + changeValue);
         incrementFunction({ id: id, increment: changeValue })
-          .then((response) => setVotes(response.votes))
           .catch((err) => {
             setVotes((votes) => votes - changeValue);
             setLikeErr("Failed to update likes");

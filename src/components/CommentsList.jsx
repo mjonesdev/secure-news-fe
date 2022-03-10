@@ -18,19 +18,21 @@ function CommentsList() {
     });
   }, [article_id]);
 
-  const commentCards = !isLoading ? (
-    comments.map((comment) => {
-      return <Comment key={comment.comment_id} comment={comment} />;
-    })
-  ) : (
-    <p>Loading...</p>
-  );
-
   return (
     <section className="comments__container-outer">
       <h3 className="comments__container-header">Comments</h3>
       <div className="comments__container-inner">
-        {commentCards}
+        {!isLoading ? (
+          comments.map((comment) => {
+            return (
+              <li key={comment.comment_id} className="comments__container-list-item">
+                <Comment comment={comment} />
+              </li>
+            );
+          })
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </section>
   );

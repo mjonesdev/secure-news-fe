@@ -22,19 +22,24 @@ function ArticleList() {
     setIsLoading(false);
   }, [topic]);
 
-  const articleList = isLoading ? (
-    <p>LOADING</p>
-  ) : (
-    articles.map((article) => (
-      <ArticleCard key={article.article_id} articleDetails={article} />
-    ))
-  );
   if (error) {
     return <ErrorMessage error={error} />;
   }
   return (
     <>
-      <div className="articleList__container">{articleList}</div>
+      <div className="articleList__container">
+        {isLoading ? (
+          <p>LOADING</p>
+        ) : (
+          <ul>
+            {articles.map((article) => (
+              <li className="articleList__container-list-item" key={article.article_id}>
+                <ArticleCard articleDetails={article} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }
