@@ -7,9 +7,7 @@ import { deleteComment } from "../api";
 import ErrorModal from "./ErrorModal";
 
 function Comment({
-  comment: { author, votes, created_at, body, comment_id },
-  setCommentDeleted,
-}) {
+  comment: { author, votes, created_at, body, comment_id }, setComments, comments}) {
   const [commentVotes, setCommentVotes] = useState();
   const [likeErr, setLikeErr] = useState(null);
   const { user, setUser } = useContext(UserContext);
@@ -22,8 +20,11 @@ function Comment({
 
   const handleDelete = () => {
     setDeleted(true);
-    deleteComment(comment_id)
-      .then((response) => setCommentDeleted(true))
+    deleteComment(comment_id).then(() => {
+      setComments((comments) => {
+        return comments.filter(comment => comment.comment_id !== comment_id)
+      })
+    })
       .catch((err) =>
         setCommentDeleteErr("Unable to delete comment. Please try again.")
       );

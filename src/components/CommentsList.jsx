@@ -9,18 +9,15 @@ function CommentsList({error, setError}) {
   const [comments, setComments] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [commentMade, setCommentMade] = useState(false)
-  const [commentDeleted, setCommentDeleted] = useState(false)
 
   const { article_id } = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
     getComments(article_id).then((response) => {
       setComments(() => response);
       setIsLoading(() => false);
-      setCommentDeleted(false)
     });
-  }, [article_id, commentMade, commentDeleted]);
+  }, [article_id, commentMade]);
 
   return (
     <section className="comments__container-outer">
@@ -30,7 +27,7 @@ function CommentsList({error, setError}) {
           comments.map((comment) => {
             return (
               <li key={comment.comment_id} className="comments__container-list-item">
-                <Comment comment={comment} setCommentDeleted={setCommentDeleted} />
+                <Comment comment={comment} setComments={setComments} comments={comments} />
               </li>
             );
           })
