@@ -5,14 +5,18 @@ import { GoPrimitiveDot } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { getTopics } from "../api";
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom";
 import "./SortAndFilter.css";
 
 function SortAndFilter() {
   const [sidebar, setSidebar] = useState(false);
   const [topics, setTopics] = useState([]);
-  
-  const {topic} = useParams()
+  const [order, setOrder] = useState();
+  const [sortBy, setSortBy] = useState();
+  const [sortParams, setSortParams] = useState({});
+
+  const { topic } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     getTopics().then((response) => {
@@ -21,9 +25,30 @@ function SortAndFilter() {
     });
   }, []);
 
+  useEffect(() => {
+    setSearchParams(sortParams);
+  }, [sortParams])
+
+  const handleOrderChange = (e) => {
+    setSortParams((sortParams) => {
+      return {...sortParams, order: e.target.value}
+    });
+  };
+  const handleSortByChange = (e) => {
+    setSortParams((sortParams) => {
+      return {...sortParams, sort_by: e.target.value}
+    })
+  };
+
   const showSidebar = () => setSidebar(!sidebar);
 
-  const topicHeader = (topic) ? <h5 className="sort__topic-title">{topic.charAt(0).toUpperCase()+topic.slice(1)}</h5> : <></>
+  const topicHeader = topic ? (
+    <h5 className="sort__topic-title">
+      {topic.charAt(0).toUpperCase() + topic.slice(1)}
+    </h5>
+  ) : (
+    <></>
+  );
 
   return (
     <div className="sort__container">
@@ -37,12 +62,14 @@ function SortAndFilter() {
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className={sidebar ? "sort__menu active" : "sort__menu"}>
           <ul className="sort__menu-items" onClick={showSidebar}>
-            <li className="sort__menuToggle">
+            <li key="menu_toggle" className="sort__menuToggle">
               <Link to="#" className="sort__menu-bars">
                 <AiOutlineClose />
               </Link>
             </li>
-            <li className="sort__menu-text">Topics</li>
+            <li key="menu_title_topic" className="sort__menu-text">
+              Topics
+            </li>
             {topics.map((topic) => {
               return (
                 <li key={topic} className="sort__sub-menu-text">
@@ -55,8 +82,63 @@ function SortAndFilter() {
                 </li>
               );
             })}
-            <li className="sort__menu-text">Sort</li>
-            <li className="sort__menu-text">
+            <li key="menu_title_sort" className="sort__menu-text">
+              Sort
+            </li>
+            <li key="menu_sort_form">
+              <h4>Order</h4>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    value="asc"
+                    checked={order === "asc"}
+                    onChange={handleOrderChange}
+                  />
+                  <span>Ascending</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="desc"
+                    checked={order === "desc"}
+                    onChange={handleOrderChange}
+                  />
+                  <span>Descending</span>
+                </label>
+              </div>
+              <h4>Sort by</h4>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    value="created_at"
+                    checked={sortBy === "created_at"}
+                    onChange={handleSortByChange}
+                  />
+                  <span>Date</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="comment_count"
+                    checked={sortBy === "comment_count"}
+                    onChange={handleSortByChange}
+                  />
+                  <span>Comment Count</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="votes"
+                    checked={sortBy === "votes"}
+                    onChange={handleSortByChange}
+                  />
+                  <span>Likes</span>
+                </label>
+              </div>
+            </li>
+            <li key="menu_reset_button" className="sort__menu-text">
               <Link to="/articles">
                 <span className="sort__menu-reset">Reset</span>
               </Link>

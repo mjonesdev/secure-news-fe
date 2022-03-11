@@ -56,8 +56,8 @@ function Navigation() {
         </div>
         <nav className={sidebar ? "nav__nav-menu active" : "nav__nav-menu"}>
           <ul className="nav__nav-menu-items" onClick={showSidebar}>
-            <li className="nav__nav-menuToggle">
-              <Link to="#" className="nav__menu-bars">
+            <li key="nav_menu_open" className="nav__nav-menuToggle">
+              <Link key="nav_menu_open_button" to="#" className="nav__menu-bars">
                 <AiOutlineClose />
               </Link>
             </li>
