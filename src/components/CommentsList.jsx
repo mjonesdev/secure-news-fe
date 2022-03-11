@@ -13,7 +13,6 @@ function CommentsList({error, setError}) {
   const { article_id } = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
     getComments(article_id).then((response) => {
       setComments(() => response);
       setIsLoading(() => false);
@@ -28,7 +27,7 @@ function CommentsList({error, setError}) {
           comments.map((comment) => {
             return (
               <li key={comment.comment_id} className="comments__container-list-item">
-                <Comment comment={comment} />
+                <Comment comment={comment} setComments={setComments} comments={comments} />
               </li>
             );
           })

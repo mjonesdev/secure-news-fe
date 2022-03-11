@@ -11,11 +11,15 @@ export function getTopics() {
 }
 
 export function getArticles(topic, order, sort_by) {
-  console.log(sort_by)
-  return api.get("/articles", { params: { topic: topic, order: order, sorted_by:sort_by } }).then((response) => {
-    console.log(response.data.articles)
-    return response.data.articles;
-  });
+  console.log(sort_by);
+  return api
+    .get("/articles", {
+      params: { topic: topic, order: order, sorted_by: sort_by },
+    })
+    .then((response) => {
+      console.log(response.data.articles);
+      return response.data.articles;
+    });
 }
 
 export function getArticle(article_id) {
@@ -49,4 +53,8 @@ export function postComment(values) {
       body: values.body,
     })
     .then((response) => response.data.comment);
+}
+
+export function deleteComment(comment_id) {
+  return api.delete(`/comments/${comment_id}`).then((response) => "true");
 }
