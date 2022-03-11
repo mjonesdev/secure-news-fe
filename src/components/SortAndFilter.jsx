@@ -11,9 +11,7 @@ import "./SortAndFilter.css";
 function SortAndFilter() {
   const [sidebar, setSidebar] = useState(false);
   const [topics, setTopics] = useState([]);
-  const [order, setOrder] = useState();
-  const [sortBy, setSortBy] = useState();
-  const [sortParams, setSortParams] = useState({});
+  const [params, setParams] = useState({});
 
   const { topic } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,18 +24,22 @@ function SortAndFilter() {
   }, []);
 
   useEffect(() => {
-    setSearchParams(sortParams);
-  }, [sortParams])
+    setSearchParams(params);
+  }, [params]);
 
   const handleOrderChange = (e) => {
-    setSortParams((sortParams) => {
-      return {...sortParams, order: e.target.value}
+    setParams((params) => {
+      return { ...params, order: e.target.value };
     });
   };
   const handleSortByChange = (e) => {
-    setSortParams((sortParams) => {
-      return {...sortParams, sort_by: e.target.value}
-    })
+    setParams((params) => {
+      return { ...params, sort_by: e.target.value };
+    });
+  };
+  const handleReset = (e) => {
+    e.preventDefault();
+    setParams({});
   };
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -54,18 +56,14 @@ function SortAndFilter() {
     <div className="sort__container">
       {topicHeader}
       <h3 className="sort__label">Sort</h3>
-      <div>
-        <Link to="#" className="sort__menu-bars sort__menu-bars-closed">
-          <GiHamburgerMenu onClick={showSidebar} />
-        </Link>
+      <div className="sort__menu-bars sort__menu-bars-closed">
+        <GiHamburgerMenu onClick={showSidebar} />
       </div>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className={sidebar ? "sort__menu active" : "sort__menu"}>
           <ul className="sort__menu-items" onClick={showSidebar}>
-            <li key="menu_toggle" className="sort__menuToggle">
-              <Link to="#" className="sort__menu-bars">
-                <AiOutlineClose />
-              </Link>
+            <li key="menu_toggle" className="sort__menuToggle sort__menu-bars">
+              <AiOutlineClose />
             </li>
             <li key="menu_title_topic" className="sort__menu-text">
               Topics
@@ -85,53 +83,53 @@ function SortAndFilter() {
             <li key="menu_title_sort" className="sort__menu-text">
               Sort
             </li>
-            <li key="menu_sort_form">
-              <h4>Order</h4>
+            <li key="menu_sort_options" className="sort__menu-list-item">
+              <span className="sort__menu-text-subheading">Order</span>
               <div>
-                <label>
+                <label className="sort__menu-radio">
                   <input
                     type="radio"
                     value="asc"
-                    checked={sortParams.order === "asc"}
+                    checked={params.order === "asc"}
                     onChange={handleOrderChange}
                   />
                   <span>Ascending</span>
                 </label>
-                <label>
+                <label className="sort__menu-radio">
                   <input
                     type="radio"
                     value="desc"
-                    checked={sortParams.order === "desc"}
+                    checked={params.order === "desc"}
                     onChange={handleOrderChange}
                   />
                   <span>Descending</span>
                 </label>
               </div>
-              <h4>Sort by</h4>
+              <span className="sort__menu-text-subheading">Sort by</span>
               <div>
-                <label>
+                <label className="sort__menu-radio">
                   <input
                     type="radio"
                     value="created_at"
-                    checked={sortParams === "created_at"}
+                    checked={params.sort_by === "created_at"}
                     onChange={handleSortByChange}
                   />
                   <span>Date</span>
                 </label>
-                <label>
+                <label className="sort__menu-radio">
                   <input
                     type="radio"
                     value="comment_count"
-                    checked={sortBy === "comment_count"}
+                    checked={params.sort_by === "comment_count"}
                     onChange={handleSortByChange}
                   />
                   <span>Comment Count</span>
                 </label>
-                <label>
+                <label className="sort__menu-radio">
                   <input
                     type="radio"
                     value="votes"
-                    checked={sortBy === "votes"}
+                    checked={params.sort_by === "votes"}
                     onChange={handleSortByChange}
                   />
                   <span>Likes</span>
@@ -140,7 +138,9 @@ function SortAndFilter() {
             </li>
             <li key="menu_reset_button" className="sort__menu-text">
               <Link to="/articles">
-                <span className="sort__menu-reset">Reset</span>
+                <span className="sort__menu-reset" onClick={handleReset}>
+                  Reset
+                </span>
               </Link>
             </li>
           </ul>

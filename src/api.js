@@ -11,7 +11,9 @@ export function getTopics() {
 }
 
 export function getArticles(topic, order, sort_by) {
-  return api.get("/articles", { params: { topic: topic, order: order, sort_by:sort_by } }).then((response) => {
+  console.log(sort_by)
+  return api.get("/articles", { params: { topic: topic, order: order, sorted_by:sort_by } }).then((response) => {
+    console.log(response.data.articles)
     return response.data.articles;
   });
 }
