@@ -32,6 +32,6 @@ a {
 }
 
 .articleCard__text-sub {
-    align-self: end;
+    align-self: flex-end;
     margin-top: 0.5rem;
 }
