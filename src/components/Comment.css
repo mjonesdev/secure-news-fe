@@ -1,22 +1,37 @@
 .comment__container {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    margin: 0.3rem;
-    border-radius: 5px;
-    padding: 0.5rem;
-    border-style: solid;
-    border-color: #393E46;
-    border-width: 2px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 0.3rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border-style: solid;
+  border-color: #393e46;
+  border-width: 2px;
 }
 
 .comment__container-header {
-    align-self: start;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
+  align-self: start;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .comment__container-body {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
+.comment__container-delete-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.comment__container-header-container {
+  display: flex;
+  justify-content: space-between;
+}

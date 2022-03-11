@@ -20,7 +20,7 @@ function AddComment({
     e.preventDefault();
     if (commentText !== "") {
       setCommentMade(() => true);
-      postComment({ username: user, body: commentText, article_id: article_id })
+      postComment({ username: user, body: commentText, article_id: article_id }).then(response => setCommentMade(false))
         .catch((err) => {
           setPostError(() => "Unable to post comment. Please try again");
           setCommentMade(() => false)
