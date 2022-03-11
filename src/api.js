@@ -10,8 +10,8 @@ export function getTopics() {
   });
 }
 
-export function getArticles(topic) {
-  return api.get("/articles", { params: { topic: topic } }).then((response) => {
+export function getArticles(topic, order, sort_by) {
+  return api.get("/articles", { params: { topic: topic, order: order, sort_by:sort_by } }).then((response) => {
     return response.data.articles;
   });
 }

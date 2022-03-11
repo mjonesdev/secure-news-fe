@@ -92,7 +92,7 @@ function SortAndFilter() {
                   <input
                     type="radio"
                     value="asc"
-                    checked={order === "asc"}
+                    checked={sortParams.order === "asc"}
                     onChange={handleOrderChange}
                   />
                   <span>Ascending</span>
@@ -101,7 +101,7 @@ function SortAndFilter() {
                   <input
                     type="radio"
                     value="desc"
-                    checked={order === "desc"}
+                    checked={sortParams.order === "desc"}
                     onChange={handleOrderChange}
                   />
                   <span>Descending</span>
@@ -113,7 +113,7 @@ function SortAndFilter() {
                   <input
                     type="radio"
                     value="created_at"
-                    checked={sortBy === "created_at"}
+                    checked={sortParams === "created_at"}
                     onChange={handleSortByChange}
                   />
                   <span>Date</span>

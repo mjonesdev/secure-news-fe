@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import "./ArticleList.css";
@@ -10,17 +10,20 @@ function ArticleList() {
   const { topic } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const search = useLocation().search
 
   useEffect(() => {
+    const order = new URLSearchParams(search).get('order');
+    const sort_by = new URLSearchParams(search).get("sort_by")
     setIsLoading(true);
     setError(null);
-    getArticles(topic)
+    getArticles(topic, order, sort_by)
       .then((response) => setArticles(response))
       .catch((err) => {
         setError({ err });
       });
     setIsLoading(false);
-  }, [topic]);
+  }, [topic, search]);
 
   if (error) {
     return <ErrorMessage error={error} />;
